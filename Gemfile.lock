@@ -224,6 +224,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver (~> 2.45.0)
+  simplecov
   sqlite3
   turbolinks (~> 5)
   tzinfo-data

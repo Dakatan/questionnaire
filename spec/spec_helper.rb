@@ -6,6 +6,7 @@ require 'rspec/autorun'
 
 if ENV['CI']
   require 'codeclimate-test-reporter'
+  require 'simplecov'
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[CodeClimate::TestReporter::Formatter]
   SimpleCov.start 'test_frameworks'
   CodeClimate::TestReporter.start
