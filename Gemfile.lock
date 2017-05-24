@@ -209,14 +209,14 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.0.1)
-  factory_girl_rails (~> 4.2.1)
+  factory_girl_rails
   jbuilder (~> 2.5)
   kaminari
   launchy (~> 2.3.0)
   puma (~> 3.7)
   rails (~> 5.1.1)
   rake (~> 11.3.0)
-  rspec-rails (~> 2.14.0)
+  rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver (~> 2.45.0)
   sqlite3
