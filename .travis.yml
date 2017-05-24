@@ -7,6 +7,5 @@ script:
 script:
   - bundle exec rake db:setup
   - bundle exec rake spec
-cache: bundler
 after_success:
   - codeclimate-test-reporter
