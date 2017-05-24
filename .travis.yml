@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+- 2.3.0
+- 2.2.4
+bundler_args: --jobs=2
+script:
+script:
+  - bundle exec rake db:setup
+  - CODECLIMATE_REPO_TOKEN=837c3a49bc4b9a03eb5971e430c26fdc13dae3a903be9602bb68506da6e03fca bundle exec rake spec
+cache: bundler

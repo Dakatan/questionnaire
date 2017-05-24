@@ -4,6 +4,13 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+if ENV['CI']
+  require 'codeclimate-test-reporter'
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[CodeClimate::TestReporter::Formatter]
+  SimpleCov.start 'test_frameworks'
+  CodeClimate::TestReporter.start
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
