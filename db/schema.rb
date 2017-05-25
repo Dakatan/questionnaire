@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170524123933) do
 
   create_table "questions", force: :cascade do |t|
     t.integer "questionnaire_id", null: false
+    t.integer "no", null: false
     t.string "title", limit: 255, null: false
     t.string "type", limit: 255, null: false
     t.text "text", limit: 65535
