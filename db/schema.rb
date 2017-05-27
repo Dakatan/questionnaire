@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20170524123933) do
 
   create_table "questions", force: :cascade do |t|
     t.integer "questionnaire_id", null: false
+    t.integer "no", null: false
     t.string "title", limit: 255, null: false
-    t.string "type", limit: 255, null: false
+    t.string "question_type", limit: 255, null: false
     t.text "text", limit: 65535
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -39,7 +40,7 @@ ActiveRecord::Schema.define(version: 20170524123933) do
 
   create_table "respondents", force: :cascade do |t|
     t.integer "questionnaire_id", null: false
-    t.string "uuid", limit: 36
+    t.string "name", limit: 50
     t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
