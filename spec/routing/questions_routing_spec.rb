@@ -3,10 +3,10 @@ require 'spec_helper'
 describe QuestionsController do
   describe 'routing' do
 
-	before do
-	  @questionnaire = create(:questionnaire)
-	  @question = create(:question)
-	end
+	  before do
+	    @questionnaire = create(:questionnaire)
+	    @question = create(:question)
+	  end
 
     it 'routes to #index' do
       expect(get: ['/questionnaires/', @questionnaire.id, '/questions'].join)

@@ -6,7 +6,7 @@ FactoryGirl.define do
 	questionnaire_id 1
 	no 1
 	title 'Title'
-	type 'Type'
+	question_type 'Type'
 	text 'Text'
   end
 end

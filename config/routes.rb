@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'questionnaires/:id/result' => 'questionnaires#result', as: 'result_questionnaire'
   resources :questionnaires do
     resources :questions, only: [:index, :show] do
-	  resources :answers, only: [:create, :update]
-	end
+	    resources :answers, only: [:create, :update]
+	  end
   end
 end
