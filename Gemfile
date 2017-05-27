@@ -53,6 +53,7 @@ group :test do
   gem 'selenium-webdriver', '~>2.45.0'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', require: false
+  gem 'rails-controller-testing'
 end
 
 group :development do
