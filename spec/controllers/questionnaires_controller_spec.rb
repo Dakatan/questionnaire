@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe QuestionnairesController do
-
   describe 'before create questionnaire test' do
     before do
       @questionnaire = create(:questionnaire)
@@ -21,34 +20,34 @@ describe QuestionnairesController do
 
     describe 'GET #show' do
       it 'assigns the requested questionnaire as @questionnaire' do
-        get :show, params: {id: @questionnaire}
+        get :show, params: { id: @questionnaire }
         expect(assigns(:questionnaire)).to eq @questionnaire
       end
 
       it 'http status is success' do
-        get :show, params: {id: @questionnaire}
+        get :show, params: { id: @questionnaire }
         expect(response).to have_http_status :success
       end
 
       it 'template is show' do
-        get :show, params: {id: @questionnaire}
+        get :show, params: { id: @questionnaire }
         expect(response).to render_template :show
       end
     end
 
     describe 'GET #result' do
       it 'assigns the requested questionnaire as @questionnaire' do
-        get :result, params: {id: @questionnaire}
+        get :result, params: { id: @questionnaire }
         expect(assigns(:questionnaire)).to eq @questionnaire
       end
 
       it 'http status is success' do
-        get :result, params: {id: @questionnaire}
+        get :result, params: { id: @questionnaire }
         expect(response).to have_http_status :success
       end
 
       it 'template is finish' do
-        get :result, params: {id: @questionnaire}
+        get :result, params: { id: @questionnaire }
         expect(response).to render_template :result
       end
     end
@@ -79,17 +78,17 @@ describe QuestionnairesController do
 
     describe 'GET #edit' do
       it 'assigns the requested questionnaire as @questionnaire' do
-        get :edit, params: {id: @questionnaire}
+        get :edit, params: { id: @questionnaire }
         expect(assigns(:questionnaire)).to eq @questionnaire
       end
 
       it 'http status is success' do
-        get :edit, params: {id: @questionnaire}
+        get :edit, params: { id: @questionnaire }
         expect(response).to have_http_status :success
       end
 
       it 'template is edit' do
-        get :edit, params: {id: @questionnaire}
+        get :edit, params: { id: @questionnaire }
         expect(response).to render_template :edit
       end
     end
@@ -97,19 +96,19 @@ describe QuestionnairesController do
     describe 'PUT #update' do
       it 'assigns the requested questionnaire as @questionnaire' do
         questionnaire_params = attributes_for(:questionnaire, title: 'changed')
-        put :update, params: {id: @questionnaire, questionnaire: questionnaire_params}
+        put :update, params: { id: @questionnaire, questionnaire: questionnaire_params }
         expect(assigns(:questionnaire)).to eq @questionnaire
       end
 
       it 'redirect to show' do
         questionnaire_params = attributes_for(:questionnaire, title: 'changed')
-        put :update, params: {id: @questionnaire, questionnaire: questionnaire_params}
+        put :update, params: { id: @questionnaire, questionnaire: questionnaire_params }
         expect(response).to have_http_status :redirect
       end
 
       it 'update is success' do
         questionnaire_params = attributes_for(:questionnaire, title: 'changed')
-        put :update, params: {id: @questionnaire, questionnaire: questionnaire_params}
+        put :update, params: { id: @questionnaire, questionnaire: questionnaire_params }
         @questionnaire.reload
         expect(@questionnaire.title).to eq 'changed'
       end
@@ -117,13 +116,13 @@ describe QuestionnairesController do
 
     describe 'DELETE #destroy' do
       it 'destroys the requested questionnaire' do
-        expect {
-          delete :destroy, params: {id: @questionnaire}
-        }.to change(Questionnaire, :count).by(-1)
+        expect do
+          delete :destroy, params: { id: @questionnaire }
+        end.to change(Questionnaire, :count).by(-1)
       end
 
       it 'redirect to index' do
-        delete :destroy, params: {id: @questionnaire}
+        delete :destroy, params: { id: @questionnaire }
         expect(response).to have_http_status :redirect
       end
     end
@@ -131,13 +130,13 @@ describe QuestionnairesController do
 
   describe 'POST #create' do
     it 'creates a new Questionnaire' do
-      expect {
-        post :create, params: {questionnaire:  attributes_for(:questionnaire)}
-      }.to change(Questionnaire, :count).by(1)
+      expect do
+        post :create, params: { questionnaire: attributes_for(:questionnaire) }
+      end.to change(Questionnaire, :count).by(1)
     end
 
     it 'redirect to show' do
-      post :create, params: {questionnaire:  attributes_for(:questionnaire)}
+      post :create, params: { questionnaire: attributes_for(:questionnaire) }
       expect(response).to have_http_status :redirect
     end
   end

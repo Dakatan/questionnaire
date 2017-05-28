@@ -1,19 +1,17 @@
 class QuestionnairesController < ApplicationController
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy]
+  before_action :set_questionnaire, only: %i[show edit update destroy]
 
   def index
     @questionnaires = Questionnaire.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @questionnaire = Questionnaire.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @questionnaire = Questionnaire.new(questionnaire_params)
@@ -49,19 +47,19 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  def finish
-  end
+  def finish; end
 
   def result
     set_questionnaire
   end
 
   private
-    def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:id])
-    end
 
-    def questionnaire_params
-      params.require(:questionnaire).permit(:title, :start_date, :end_date)
-    end
+  def set_questionnaire
+    @questionnaire = Questionnaire.find(params[:id])
+  end
+
+  def questionnaire_params
+    params.require(:questionnaire).permit(:title, :start_date, :end_date)
+  end
 end
