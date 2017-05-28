@@ -6,19 +6,19 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
-  def show
-  end
+  def show; end
 
   private
-    def set_question
-      @question = Question.find(params[:id])
-    end
 
-    def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
-    end
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
-    def question_params
-      params.require(:answer).permit(:questionnaire_id, :no, :title, :question_type, :text)
-    end
+  def set_questionnaire
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
+  end
+
+  def question_params
+    params.require(:answer).permit(:questionnaire_id, :no, :title, :question_type, :text)
+  end
 end
