@@ -1,5 +1,37 @@
 require 'spec_helper'
 
 describe Question do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#prev' do
+    before do
+      @questionnaire = create(:questionnaire)
+    end
+
+    it 'question has prev' do
+      prev_question = create(:question)
+      question = create(:question, id: 2, no: 2)
+      expect(question.prev).to eq prev_question
+    end
+
+    it 'question does not have prev' do
+      question = create(:question)
+      expect(question.prev).to eq nil
+    end
+  end
+
+  describe '#next' do
+    before do
+      @questionnaire = create(:questionnaire)
+    end
+
+    it 'question has next' do
+      question = create(:question)
+      next_question = create(:question, id: 2, no: 2)
+      expect(question.next).to eq next_question
+    end
+
+    it 'question does not have next' do
+      question = create(:question)
+      expect(question.next).to eq nil
+    end
+  end
 end
