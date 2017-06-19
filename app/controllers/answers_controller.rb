@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
 
     respond_to do |format|
-      if @answer.save
+      if @answer.save!
         format.html { redirect_to root_path, notice: 'Answer was successfully created.' }
         format.json { render :show, status: :created, location: @answer }
       else
