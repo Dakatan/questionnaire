@@ -1,4 +1,4 @@
 class Questionnaire < ApplicationRecord
   has_many :questions
-  has_many :respondent
+  has_many :respondents
 end
