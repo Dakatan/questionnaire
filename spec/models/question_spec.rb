@@ -34,4 +34,35 @@ describe Question do
       expect(question.next).to eq nil
     end
   end
+
+  describe '#answers' do
+    before do
+      @questionnaire = create(:questionnaire)
+      @question = create(:question)
+      @respondent = create(:respondent)
+      @answer = create(:answer)
+    end
+
+    it 'question has many answer' do
+      question = Question.find(1)
+      answers = question.answers
+      expect(answers.count).to eq 1
+      expect(answers.first).to eq @answer
+    end
+  end
+
+  describe '#questionnaire' do
+    before do
+      @questionnaire = create(:questionnaire)
+      @question = create(:question)
+      @respondent = create(:respondent)
+      @answer = create(:answer)
+    end
+
+    it 'question has many questionnaire' do
+      question = Question.find(1)
+      questionnaire = question.questionnaire
+      expect(questionnaire).to eq @questionnaire
+    end
+  end
 end
