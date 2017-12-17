@@ -16,6 +16,16 @@ describe QuestionnairesController do
         .to route_to(controller: 'questionnaires', action: 'index')
     end
 
+    it 'routes to #show' do
+      expect(get: ['/questionnaires/', @questionnaire.id].join)
+        .to route_to(controller: 'questionnaires', action: 'show', id: '1')
+    end
+
+    it 'routes to #show' do
+      expect(get: questionnaire_path(@questionnaire))
+        .to route_to(controller: 'questionnaires', action: 'show', id: '1')
+    end
+
     it 'routes to #new' do
       expect(get: '/questionnaires/new')
         .to route_to(controller: 'questionnaires', action: 'new')

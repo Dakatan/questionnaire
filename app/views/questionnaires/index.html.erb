@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Questionnaires</h1>
+<h1>アンケート</h1>
 
 <table>
   <thead>
@@ -12,9 +12,9 @@
   <tbody>
     <% @questionnaires.each do |questionnaire| %>
       <tr>
-        <td><%= link_to 'Show', questionnaire %></td>
-        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
-        <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>タイトル: <%= questionnaire.title %></td>
+        <td><%= link_to '詳細', questionnaire %></td>
+        <td><%= link_to '削除', questionnaire, method: :delete, data: { confirm: '削除します、よろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Questionnaire', new_questionnaire_path %>
+<%= link_to '新規作成', new_questionnaire_path %>

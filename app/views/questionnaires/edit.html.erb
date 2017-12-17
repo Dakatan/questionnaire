@@ -1,6 +1,6 @@
-<h1>Editing Questionnaire</h1>
+<h1>アンケート編集</h1>
 
 <%= render 'form', questionnaire: @questionnaire %>
 
-<%= link_to 'Show', @questionnaire %> |
-<%= link_to 'Back', questionnaires_path %>
+<%= link_to '詳細', @questionnaire %> |
+<%= link_to '戻る', questionnaire_path(@questionnaire) %>

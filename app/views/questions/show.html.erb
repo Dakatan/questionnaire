@@ -1,4 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<h1>質問詳細</h1>
+
+<table>
+  <tr><td>No.</td><td><%= @question.no %></td></tr>
+  <tr><td>タイトル</td><td><%= @question.title %></td></tr>
+  <tr><td>質問タイプ</td><td><%= @question.question_type %></td></tr>
+  <tr><td>テキスト</td><td><%= @question.text %></td></tr>
+</table>
+
+<%= link_to '戻る', questionnaire_path(@questionnaire) %>

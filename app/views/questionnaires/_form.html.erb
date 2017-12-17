@@ -1,4 +1,4 @@
-<%= form_with(model: questionnaire, local: true) do |form| %>
+<%= form_with(model: questionnaire, local: true) do |f| %>
   <% if questionnaire.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
@@ -11,7 +11,19 @@
     </div>
   <% end %>
 
+  <table>
+    <tr>
+      <td>タイトル</td><td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <td>開始日</td><td><%= f.date_field :start_date %></td>
+    </tr>
+    <tr>
+      <td>終了日</td><td><%= f.date_field :end_date %></td>
+    </tr>
+  </table>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 <% end %>

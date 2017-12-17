@@ -1,4 +1,4 @@
-<%= form_with(model: question, local: true) do |form| %>
+<%= form_with(model: question, local: true, url: url) do |f| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -11,7 +11,22 @@
     </div>
   <% end %>
 
+  <table>
+    <tr>
+      <td>No.</td><td><%= f.text_field :no %></td>
+    </tr>
+    <tr>
+      <td>タイトル</td><td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <td>質問タイプ</td><td><%= f.text_field :question_type %></td>
+    </tr>
+    <tr>
+      <td>テキスト</td><td><%= f.text_area :text %></td>
+    </tr>
+  </table>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 <% end %>
