@@ -2,7 +2,7 @@ class QuestionnairesController < ApplicationController
   before_action :set_questionnaire, only: %i[show edit update destroy]
 
   def index
-    @questionnaires = Questionnaire.all
+    @questionnaires = Questionnaire.all.page(params[:page])
   end
 
   def show; end
@@ -16,35 +16,24 @@ class QuestionnairesController < ApplicationController
   def create
     @questionnaire = Questionnaire.new(questionnaire_params)
 
-    respond_to do |format|
-      if @questionnaire.save
-        format.html { redirect_to @questionnaire, notice: 'Questionnaire was successfully created.' }
-        format.json { render :show, status: :created, location: @questionnaire }
-      else
-        format.html { render :new }
-        format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
-      end
+    if @questionnaire.save
+      redirect_to @questionnaire, notice: 'アンケートを追加しました'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @questionnaire.update(questionnaire_params)
-        format.html { redirect_to @questionnaire, notice: 'Questionnaire was successfully updated.' }
-        format.json { render :show, status: :ok, location: @questionnaire }
-      else
-        format.html { render :edit }
-        format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
-      end
+    if @questionnaire.update(questionnaire_params)
+      redirect_to @questionnaire, notice: 'アンケートを更新しました'
+    else
+      render :edit
     end
   end
 
   def destroy
     @questionnaire.destroy
-    respond_to do |format|
-      format.html { redirect_to questionnaires_url, notice: 'Questionnaire was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to questionnaires_url, notice: 'アンケートを削除しました'
   end
 
   def finish; end
@@ -60,6 +49,6 @@ class QuestionnairesController < ApplicationController
   end
 
   def questionnaire_params
-    params.require(:questionnaire).permit(:title, :start_date, :end_date)
+    params.require(:questionnaire).permit(:title, :start_date, :end_date, :comment)
   end
 end
