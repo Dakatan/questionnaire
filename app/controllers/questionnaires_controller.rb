@@ -2,7 +2,7 @@ class QuestionnairesController < ApplicationController
   before_action :set_questionnaire, only: %i[show edit update destroy]
 
   def index
-    @questionnaires = Questionnaire.all
+    @questionnaires = Questionnaire.all.page(params[:page])
   end
 
   def show; end
