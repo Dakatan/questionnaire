@@ -21,9 +21,12 @@
     <tr>
       <td>終了日</td><td><%= f.date_field :end_date %></td>
     </tr>
+    <tr>
+      <td>コメント</td><td><%= f.text_area :comment %></td>
+    </tr>
   </table>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '登録する' %>
   </div>
 <% end %>
