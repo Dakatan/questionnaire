@@ -1,5 +1,4 @@
 <h1>新規質問</h1>
+<hr>
 
 <%= render 'form', question: @question, url: questionnaire_questions_path(@questionnaire) %>
-
-<%= link_to '戻る', questionnaire_path(@questionnaire) %>

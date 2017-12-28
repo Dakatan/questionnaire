@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>アンケート</h1>
-
+<h1>アンケート一覧</h1>
+<hr>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,8 +19,15 @@
         <td><%= questionnaire.end_date %></td>
         <td><%= questionnaire.comment %></td>
         <td>
-          <%= link_to '編集', edit_questionnaire_path(questionnaire), class: 'btn btn-primary' %>
-          <%= link_to '削除', questionnaire, method: :delete, data: { confirm: '削除します、よろしいですか？' }, class: 'btn btn-danger' %>
+          <%= link_to questionnaire_path(questionnaire), class: 'btn btn-sm btn-info' do %>
+            <i class="fa fa-external-link" aria-hidden="true"></i> 詳細
+          <% end %>
+          <%= link_to edit_questionnaire_path(questionnaire), class: 'btn btn-sm btn-primary' do %>
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編集
+          <% end %>
+          <%= link_to questionnaire, method: :delete, data: { confirm: 'アンケートを削除します、よろしいですか？' }, class: 'btn btn-sm btn-danger' do %>
+            <i class="fa fa-times" aria-hidden="true"></i> 削除
+          <% end %>
         </td>
       </tr>
     <% end %>
@@ -31,6 +36,6 @@
 
 <%= paginate @questionnaires %>
 
-<br>
-
-<%= link_to '新規作成', new_questionnaire_path, class: 'btn btn-primary' %>
+<%= link_to new_questionnaire_path, class: 'btn btn-primary' do %>
+  <i class="fa fa-plus" aria-hidden="true"></i> 新規作成
+<% end %>

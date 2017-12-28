@@ -1,44 +1,75 @@
-<p id="notice"><%= notice %></p>
-
 <h1>アンケート詳細</h1>
+<hr>
 
-<table>
-  <tr>
-    <th>タイトル</th>
-    <th>開始日</th>
-    <th>終了日</th>
-  </tr>
-  <tr>
-    <td><%= @questionnaire.title %></td>
-    <td><%= @questionnaire.start_date %></td>
-    <td><%= @questionnaire.end_date %></td>
-    <td><%= @questionnaire.comment %></td>
-  </tr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>コメント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @questionnaire.title %></td>
+      <td><%= @questionnaire.start_date %></td>
+      <td><%= @questionnaire.end_date %></td>
+      <td><%= @questionnaire.comment %></td>
+    </tr>
+  </tbody>
 </table>
 
-<% if(@questionnaire.questions.present?) %>
+<%= link_to edit_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-primary' do %>
+  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編集
+<% end %>
+&nbsp;
+<%= link_to questionnaire_path(@questionnaire), method: :delete, data: { confirm: '質問を削除します、よろしいですか？' }, class: 'btn btn-sm btn-danger' do %>
+  <i class="fa fa-times" aria-hidden="true"></i> 削除
+<% end %>
+&nbsp;
+<%= link_to 'アンケート一覧へ戻る', questionnaires_path, class: 'btn btn-sm btn-success' %>
+
+<hr>
 <h2>質問一覧</h2>
-<table>
-  <tr>
-    <th>タイトル</th>
-    <th>質問タイプ</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<% if(@questionnaire.questions.present?) %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>タイトル</th>
+      <th>質問タイプ</th>
+      <th>テキスト</th>
+      <th></th>
+    </tr>
+  </thead>
   <% @questionnaire.questions.each do |question| %>
-  <tr>
-    <td><%= question.title %></td>
-    <td><%= question.question_type %></td>
-    <td><%= link_to '詳細', questionnaire_question_path(@questionnaire, question) %></td>
-    <td><%= link_to '編集', edit_questionnaire_question_path(@questionnaire, question) %></td>
-    <td><%= link_to '削除', questionnaire_question_path(@questionnaire, question), method: :delete, data: { confirm: '削除します、よろしいですか？' } %></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td><%= question.no %></td>
+      <td><%= question.title %></td>
+      <td><%= question.question_type %></td>
+      <td><%= question.text %></td>
+      <td>
+        <%= link_to questionnaire_question_path(@questionnaire, question), class: 'btn btn-sm btn-info' do %>
+          <i class="fa fa-external-link" aria-hidden="true"></i> 詳細
+        <% end %>
+        <%= link_to edit_questionnaire_question_path(@questionnaire, question), class: 'btn btn-sm btn-primary' do %>
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編集
+        <% end %>
+        <%= link_to questionnaire_question_path(@questionnaire, question), method: :delete, data: { confirm: 'アンケートを削除します、よろしいですか？' }, class: 'btn btn-sm btn-danger' do %>
+          <i class="fa fa-times" aria-hidden="true"></i> 削除
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
   <% end %>
 </table>
+<% else %>
+  <p>質問はありません</p>
 <% end %>
 
-<%= link_to '質問追加', new_questionnaire_question_path(@questionnaire) %> |
-<%= link_to '編集', edit_questionnaire_path(@questionnaire) %> |
-<%= link_to '削除', questionnaire_path(@questionnaire), method: :delete, data: { confirm: '削除します、よろしいですか？' } %> |
-<%= link_to '戻る', questionnaires_path %>
+<%= link_to new_questionnaire_question_path(@questionnaire), class: 'btn btn-primary' do %>
+  <i class="fa fa-plus" aria-hidden="true"></i> 質問追加
+<% end %>
+

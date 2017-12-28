@@ -49,6 +49,6 @@ class QuestionnairesController < ApplicationController
   end
 
   def questionnaire_params
-    params.require(:questionnaire).permit(:title, :start_date, :end_date)
+    params.require(:questionnaire).permit(:title, :start_date, :end_date, :comment)
   end
 end
