@@ -7,6 +7,7 @@
       <th>タイトル</th>
       <th>開始日</th>
       <th>終了日</th>
+      <th>有効/無効</th>
       <th>コメント</th>
     </tr>
   </thead>
@@ -15,6 +16,13 @@
       <td><%= @questionnaire.title %></td>
       <td><%= @questionnaire.start_date %></td>
       <td><%= @questionnaire.end_date %></td>
+      <td>
+        <% if @questionnaire.active? %>
+          有効
+        <% else %>
+          無効
+        <% end %>
+      </td>
       <td><%= @questionnaire.comment %></td>
     </tr>
   </tbody>

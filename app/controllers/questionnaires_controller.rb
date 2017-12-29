@@ -17,7 +17,7 @@ class QuestionnairesController < ApplicationController
     @questionnaire = Questionnaire.new(questionnaire_params)
 
     if @questionnaire.save
-      redirect_to @questionnaire, notice: 'アンケートを追加しました'
+      redirect_to questionnaires_url, notice: 'アンケートを追加しました'
     else
       render :new
     end
@@ -25,7 +25,7 @@ class QuestionnairesController < ApplicationController
 
   def update
     if @questionnaire.update(questionnaire_params)
-      redirect_to @questionnaire, notice: 'アンケートを更新しました'
+      redirect_to questionnaires_url, notice: 'アンケートを更新しました'
     else
       render :edit
     end
@@ -49,6 +49,6 @@ class QuestionnairesController < ApplicationController
   end
 
   def questionnaire_params
-    params.require(:questionnaire).permit(:title, :start_date, :end_date, :comment)
+    params.require(:questionnaire).permit(:title, :start_date, :end_date, :comment, :active)
   end
 end
