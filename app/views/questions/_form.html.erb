@@ -44,7 +44,7 @@
       <% if question.errors[:text].blank? %>
         <%= f.text_area :text, class: 'form-control' %>
       <% else %>
-        <%= f.text_area :text, class: 'form-control' %>
+        <%= f.text_area :text, class: 'form-control is-invalid' %>
         <span class="text-danger">
           <%= question.errors[:text].first %>
         </span>
