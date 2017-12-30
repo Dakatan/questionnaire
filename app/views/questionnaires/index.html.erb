@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>タイトル</th>
       <th>開始日</th>
       <th>終了日</th>
@@ -15,6 +16,11 @@
   <tbody>
     <% @questionnaires.each do |questionnaire| %>
       <tr>
+        <td>
+          <%= link_to root_path, class: 'btn btn-sm btn-success' do %>
+            <i class="fa fa-mouse-pointer" aria-hidden="true"></i> 回答する
+          <% end %>
+        </td>
         <td><%= questionnaire.title %></td>
         <td><%= questionnaire.start_date %></td>
         <td><%= questionnaire.end_date %></td>

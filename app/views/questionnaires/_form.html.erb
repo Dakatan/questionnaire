@@ -1,18 +1,15 @@
 <%= form_with(model: questionnaire, local: true) do |f| %>
-  <% if questionnaire.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
-      <ul>
-      <% questionnaire.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">タイトル</label>
     <div class="col-sm-10">
-      <%= f.text_field :title, class: 'form-control' %>
+      <% if questionnaire.errors.messages[:title].blank? %>
+        <%= f.text_field :title, class: 'form-control' %>
+      <% else %>
+        <%= f.text_field :title, class: 'form-control is-invalid' %>
+        <span class="text-danger">
+          <%= questionnaire.errors.messages[:title].first %>
+        </span>
+      <% end %>
     </div>
   </div>
   <div class="form-group row">
@@ -20,8 +17,17 @@
     <div class="col-sm-10">
       <div class="input-group mr-sm-2">
         <div class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
-        <%= f.text_field :start_date, class: 'form-control datepicker' %>
+        <% if questionnaire.errors.messages[:start_date].blank? %>
+          <%= f.text_field :start_date, class: 'form-control datepicker' %>
+        <% else %>
+          <%= f.text_field :start_date, class: 'form-control datepicker is-invalid' %>
+        <% end %>
       </div>
+      <% if questionnaire.errors.messages[:start_date].present? %>
+        <span class="text-danger">
+          <%= questionnaire.errors.messages[:start_date].first %>
+        </span>
+      <% end %>
     </div>
   </div>
   <div class="form-group row">
@@ -29,8 +35,17 @@
     <div class="col-sm-10">
       <div class="input-group mr-sm-2">
         <div class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
-        <%= f.text_field :end_date, class: 'form-control datepicker' %>
+        <% if questionnaire.errors.messages[:end_date].blank? %>
+          <%= f.text_field :end_date, class: 'form-control datepicker' %>
+        <% else %>
+          <%= f.text_field :end_date, class: 'form-control datepicker is-invalid' %>
+        <% end %>
       </div>
+      <% if questionnaire.errors.messages[:end_date].present? %>
+        <span class="text-danger">
+          <%= questionnaire.errors.messages[:end_date].first %>
+        </span>
+      <% end %>
     </div>
   </div>
   <fieldset class="form-group">

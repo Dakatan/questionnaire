@@ -1,4 +1,9 @@
 class Questionnaire < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :respondents, dependent: :destroy
+
+  VALID_DATE_FORMAT = /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/
+  validates :title, presence: true
+  validates :start_date, presence: true, format: VALID_DATE_FORMAT
+  validates :end_date, presence: true, format: VALID_DATE_FORMAT
 end
