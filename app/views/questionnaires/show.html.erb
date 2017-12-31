@@ -51,8 +51,8 @@
       <th></th>
     </tr>
   </thead>
-  <% @questionnaire.questions.each do |question| %>
   <tbody>
+  <% @questionnaire.questions.each do |question| %>
     <tr>
       <td><%= question.no %></td>
       <td><%= question.title %></td>
@@ -70,8 +70,8 @@
         <% end %>
       </td>
     </tr>
-  </tbody>
   <% end %>
+  </tbody>
 </table>
 <% else %>
   <p>質問はありません</p>
