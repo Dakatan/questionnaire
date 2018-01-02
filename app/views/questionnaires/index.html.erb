@@ -1,5 +1,6 @@
 <h1>アンケート一覧</h1>
 <hr>
+<% if @questionnaires.present? %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -47,6 +48,9 @@
     <% end %>
   </tbody>
 </table>
+<% else %>
+  <p>アンケートはありません</p>
+<% end %>
 
 <%= paginate @questionnaires %>
 

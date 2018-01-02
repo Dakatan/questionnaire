@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
@@ -12,7 +13,7 @@
       <button type="button" class="navbar-toggler">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="<%= root_path %>">アンケート</a>
+      <%= link_to 'アンケート', root_path, class: 'navbar-brand' %>
     </nav>
     <br>
     <% if notice.present? %>

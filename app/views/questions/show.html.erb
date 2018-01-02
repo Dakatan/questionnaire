@@ -1,11 +1,24 @@
 <h1>質問詳細</h1>
 <hr>
 
-<table>
-  <tr><td>No.</td><td><%= @question.no %></td></tr>
-  <tr><td>タイトル</td><td><%= @question.title %></td></tr>
-  <tr><td>質問タイプ</td><td><%= @question.question_type %></td></tr>
-  <tr><td>テキスト</td><td><%= @question.text %></td></tr>
+<table class="table">
+  <tr>
+    <th>No.</th>
+    <td><%= @question.no %></td>
+  </tr>
+  <tr>
+    <th>タイトル</th>
+    <td><%= @question.title %></td>
+  </tr>
+  <tr>
+    <th>質問タイプ</th>
+    <td><%= @question.question_type %></td>
+  </tr>
+  <tr>
+    <th>テキスト</th>
+    <td><%= @question.text %></td>
+  </tr>
 </table>
 
-<%= link_to '戻る', questionnaire_path(@questionnaire) %>
+<hr>
+<%= link_to 'アンケート詳細へ戻る', questionnaire_path(@questionnaire), class: 'btn btn-sm btn-success' %>
