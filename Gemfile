@@ -13,7 +13,6 @@ gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'rails-i18n'
 gem 'config'
-gem 'react-rails'
 gem 'webpacker', github: 'rails/webpacker'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
