@@ -5,14 +5,24 @@ import ReactDOM from 'react-dom'
 class QuestionForm extends React.Component {
   render() {
     return (
-      <div>This is a sample!</div>
+      <div>
+          <input className="form-control" type="text" name="TTT" value={this.props.questionValue} />
+      </div>
     )
   }
 }
 
+QuestionForm.defaultProps = {
+  questionValue: ""
+};
+
+QuestionForm.propTypes = {
+  questionValue: PropTypes.string
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <QuestionForm name="React" />,
+    <QuestionForm />,
     document.getElementById('question-form')
   )
 });
