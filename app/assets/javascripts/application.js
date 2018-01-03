@@ -15,7 +15,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery-ui
+//= require jquery-ui/widgets/datepicker
 
 $(function () {
   $('.datepicker').datepicker({
