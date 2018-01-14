@@ -47,7 +47,7 @@
       <th>No.</th>
       <th>タイトル</th>
       <th>質問タイプ</th>
-      <th>テキスト</th>
+      <th>質問個数</th>
       <th></th>
     </tr>
   </thead>
@@ -56,8 +56,8 @@
     <tr>
       <td><%= question.no %></td>
       <td><%= question.title %></td>
-      <td><%= question.question_type %></td>
-      <td><%= question.text %></td>
+      <td><%= Settings.question[:types_map][question.question_type] %></td>
+      <td><%= question.text.present? ? JSON.parse(question.text).length : 0 %></td>
       <td>
         <%= link_to questionnaire_question_path(@questionnaire, question), class: 'btn btn-sm btn-info' do %>
           <i class="fa fa-external-link" aria-hidden="true"></i> 詳細
@@ -80,4 +80,3 @@
 <%= link_to new_questionnaire_question_path(@questionnaire), class: 'btn btn-primary' do %>
   <i class="fa fa-plus" aria-hidden="true"></i> 質問追加
 <% end %>
-

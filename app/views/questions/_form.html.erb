@@ -1,5 +1,4 @@
-<%= javascript_pack_tag 'question_form' %>
-<%= form_with(model: question, local: true, url: url) do |f| %>
+<%= form_with(model: question, local: true, url: url, id: 'form') do |f| %>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">タイトル</label>
     <div class="col-sm-10">
@@ -17,36 +16,131 @@
     <label class="col-sm-2 col-form-label">質問タイプ</label>
     <div class="col-sm-10">
       <% if question.errors[:question_type].blank? %>
-        <%= f.text_field :question_type, class: 'form-control' %>
+        <%= f.select :question_type, Settings.question[:types_map].to_a.map{|i| i.reverse}, {}, class: 'form-control' %>
       <% else %>
-        <%= f.text_field :question_type, class: 'form-control is-invalid' %>
+        <%= f.select :question_type, Settings.question[:types_map].to_a.map{|i| i.reverse}, {}, class: 'form-control is-invalid' %>
         <span class="text-danger">
           <%= question.errors[:question_type].first %>
         </span>
       <% end %>
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">テキスト</label>
-    <div class="col-sm-10">
-      <% if question.errors[:text].blank? %>
-        <%= f.text_area :text, class: 'form-control' %>
-      <% else %>
-        <%= f.text_area :text, class: 'form-control is-invalid' %>
-        <span class="text-danger">
-          <%= question.errors[:text].first %>
-        </span>
+  <hr>
+  <div id="selection-form">
+    <% if question[:text].present? %>
+      <% question_selections = JSON.parse(question[:text]) %>
+      <% first_question_selection = question_selections.shift %>
+      <div class="actions form-group row">
+        <label class="col-sm-2 col-form-label">質問</label>
+        <div class="col-sm-10">
+          <% if question.errors[:text].blank? %>
+            <input title="selection" class="form-control selection" value="<%= first_question_selection.to_s %>" />
+          <% else %>
+            <input title="selection" class="form-control selection is-invalid" value="<%= first_question_selection.to_s %>" />
+            <span class="text-danger">
+              <%= question.errors[:text].first %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <% question_selections.each do |selection| %>
+        <div class="actions form-group row">
+          <div class="offset-sm-2 col-sm-9">
+            <input title="selection" class="form-control selection" value="<%= selection.to_s %>" />
+          </div>
+          <div class="col-sm-1">
+            <button type="button" class="btn btn-danger remove-selection">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
       <% end %>
+    <% else %>
+      <div class="actions form-group row">
+        <label class="col-sm-2 col-form-label">質問</label>
+        <div class="col-sm-10">
+          <input title="selection" class="form-control selection" value="" />
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button class="btn btn-info btn-sm" id="add-selection" type="button">
+        <i class="fa fa-plus" aria-hidden="true"></i> 選択肢追加
+      </button>
     </div>
   </div>
   <div class="actions form-group row">
-    <label class="col-sm-2 col-form-label">質問</label>
-    <div id="question-form" class="col-sm-10"></div>
-  </div>
-  <div class="actions form-group row">
     <div class="offset-sm-2 col-sm-10">
-      <%= f.submit '登録する', class: 'btn btn-primary' %>
+      <%= f.submit '登録する', class: 'btn btn-primary', id: 'submit-btn' %>
     </div>
   </div>
 <% end %>
 <%= link_to 'アンケート詳細へ戻る', questionnaire_path(@questionnaire), class: 'btn btn-success btn-sm' %>
+<script type="text/javascript">
+  var count = 1;
+  const animationMills = 500;
+  var selectionInput = (function() {
+      /*
+      <div class="actions form-group row">
+        <div class="offset-sm-2 col-sm-9">
+          <input class="form-control selection" />
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-danger remove-selection">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+       */
+  }).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+
+  var validationMessage = '<span class="text-danger">値が空です</span>';
+
+  // on click add selection input tag.
+  $('#add-selection').on('click', function() {
+    $(selectionInput).appendTo('#selection-form').hide().fadeIn(animationMills);
+  });
+
+  // on click remove selection input tag.
+  $(document).on('click', '.remove-selection', function() {
+    var target = $(this).parent().parent();
+    target.fadeOut(animationMills, function() {
+      $(this).remove();
+    });
+  });
+
+  // before submit create hidden tag.
+  $(document).on('submit', '#form', function() {
+    var form = $(this);
+    var selections = [];
+    var hasError = false;
+    $('.selection').each(function() {
+      var elem = $(this);
+      var selectionValue = elem.val();
+      if(!selectionValue) {
+        if(!elem.hasClass('is-invalid')) {
+          elem.addClass('is-invalid');
+          elem.parent().append(validationMessage);
+        }
+        hasError = true;
+      } else {
+        elem.removeClass('is-invalid');
+        elem.parent().children('span').remove();
+      }
+      selections.push(selectionValue);
+    });
+    if(hasError) {
+      // remove disabled after submit.
+      setTimeout(function() {
+        if(hasError) $('#submit-btn').removeAttr('disabled');
+      }, 100);
+      return false;
+    } else {
+      var json = escapeHTML(JSON.stringify(selections));
+      form.append('<input type="hidden" name="question[text]" value="' + json + '" />');
+      form.submit();
+    }
+  });
+</script>

@@ -6,7 +6,9 @@ class Question < ApplicationRecord
   has_many :answers
 
   validates :title, presence: true
-  validates :question_type, presence: true
+  validates :question_type, presence: true, length: { is: 2 }, inclusion: { in: Settings.question[:types_map].keys.map{|i| i.to_s} }
+  validates :text, presence: true
+  validate :json_array_lint
 
   def prev
     @prev ||= Question.find_by(questionnaire_id: questionnaire_id, no: no.to_i - 1)
@@ -29,6 +31,17 @@ class Question < ApplicationRecord
     greater_no_questions.each do |question|
       question.no = question.no - 1
       question.save
+    end
+  end
+
+  def json_array_lint
+    begin
+      json = JSON.parse(text)
+      if !json.instance_of?(Array)
+        errors.add(:text, '形式が正しくないか不正な文字が含まれています')
+      end
+    rescue JSON::ParserError => e
+      errors.add(:text, '形式が正しくないか不正な文字が含まれています')
     end
   end
 end
