@@ -6,7 +6,7 @@ class Question < ApplicationRecord
   has_many :answers
 
   validates :title, presence: true
-  validates :question_type, presence: true, length: { is: 2 }, inclusion: { in: Settings.question[:types_map].keys.map{|i| i.to_s} }
+  validates :question_type, presence: true, inclusion: { in: Settings.question[:types_map].keys.map{|i| i.to_s} }
   validates :text, presence: true
   validate :json_array_lint
 
