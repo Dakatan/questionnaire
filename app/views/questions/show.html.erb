@@ -1,7 +1,7 @@
 <h1>質問詳細</h1>
 <hr>
 
-<table class="table">
+<table class="table table-striped">
   <tr>
     <th>No.</th>
     <td><%= @question.no %></td>
@@ -12,12 +12,17 @@
   </tr>
   <tr>
     <th>質問タイプ</th>
-    <td><%= @question.question_type %></td>
+    <td><%= Settings.question[:types_map][@question.question_type] %></td>
   </tr>
-  <tr>
-    <th>テキスト</th>
-    <td><%= @question.text %></td>
-  </tr>
+</table>
+<hr>
+<h3>選択</h3>
+<table class="table table-striped">
+  <% JSON.parse(@question.text).each do |selection| %>
+    <tr>
+      <td><%= selection %></td>
+    </tr>
+  <% end %>
 </table>
 
 <hr>
