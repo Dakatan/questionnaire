@@ -37,7 +37,7 @@ class Question < ApplicationRecord
   def json_array_lint
     begin
       json = JSON.parse(text)
-      if !json.instance_of?(Array)
+      unless json.instance_of?(Array)
         errors.add(:text, '形式が正しくないか不正な文字が含まれています')
       end
     rescue JSON::ParserError => e
