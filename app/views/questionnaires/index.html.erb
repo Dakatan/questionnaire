@@ -18,8 +18,14 @@
     <% @questionnaires.each do |questionnaire| %>
       <tr>
         <td>
-          <%= link_to root_path, class: 'btn btn-sm btn-success' do %>
-            <i class="fa fa-mouse-pointer" aria-hidden="true"></i> 回答する
+          <% if questionnaire.questions.count != 0 %>
+            <%= link_to get_ans_question_questionnaire_path(questionnaire, 1), class: 'btn btn-sm btn-success' do %>
+              <i class="fa fa-mouse-pointer" aria-hidden="true"></i> 回答する
+            <% end %>
+          <% else %>
+            <button type="button" class="btn btn-sm btn-success" disabled>
+              <i class="fa fa-mouse-pointer" aria-hidden="true"></i> 回答する
+            </button>
           <% end %>
         </td>
         <td><%= questionnaire.title %></td>

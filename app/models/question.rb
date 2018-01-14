@@ -18,6 +18,14 @@ class Question < ApplicationRecord
     Question.find_by(questionnaire_id: questionnaire_id, no: no.to_i + 1)
   end
 
+  def final?
+    self.next.blank?
+  end
+
+  def first?
+    prev.blank?
+  end
+
   private
 
   def initialize_no
