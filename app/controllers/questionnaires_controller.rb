@@ -1,5 +1,6 @@
 class QuestionnairesController < ApplicationController
-  before_action :set_questionnaire, only: %i[show edit update destroy]
+  before_action :set_questionnaire, only: %i[show edit update destroy show_question answer]
+  before_action :set_question_by_no, only: %i[show_question answer]
 
   def index
     @questionnaires = Questionnaire.all.page(params[:page])
@@ -42,10 +43,23 @@ class QuestionnairesController < ApplicationController
     set_questionnaire
   end
 
+  def show_question
+    @answer = @question.answers.build
+    render 'question'
+  end
+
+  def answer
+
+  end
+
   private
 
   def set_questionnaire
     @questionnaire = Questionnaire.find(params[:id])
+  end
+
+  def set_question_by_no
+    @question = Questionnaire.find(params[:id]).questions.find_by(no: params[:no])
   end
 
   def questionnaire_params
