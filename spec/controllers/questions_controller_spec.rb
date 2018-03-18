@@ -65,5 +65,53 @@ describe QuestionsController do
         expect(response).to render_template :new
       end
     end
+
+    describe 'DELETE #destroy' do
+      it 'destroys the requested question' do
+        expect do
+          delete :destroy, params: { questionnaire_id: @questionnaire.id, id: @question }
+        end.to change(Question, :count).by(-1)
+      end
+
+      it 'redirect to index' do
+        delete :destroy, params: { questionnaire_id: @questionnaire.id, id: @question }
+        expect(response).to have_http_status :redirect
+      end
+    end
+
+
+    describe 'PUT #update' do
+      it 'assigns the requested questionnaire as @question' do
+        question_params = attributes_for(:question, title: 'changed')
+        put :update, params: { questionnaire_id: @questionnaire.id, id: @question, question: question_params }
+        expect(assigns(:question)).to eq @question
+      end
+
+      it 'redirect' do
+        question_params = attributes_for(:question, title: 'changed')
+        put :update, params: { questionnaire_id: @questionnaire.id, id: @question, question: question_params }
+        expect(response).to have_http_status :redirect
+      end
+
+      it 'update is success' do
+        question_params = attributes_for(:question, title: 'changed')
+        put :update, params: { questionnaire_id: @questionnaire.id, id: @question, question: question_params }
+        @question.reload
+        expect(@question.title).to eq 'changed'
+      end
+    end
+  end
+
+  describe 'POST #create' do
+    it 'post request data question will be save' do
+      expect do
+        post :create, params: { questionnaire_id: @questionnaire.id, question: attributes_for(:question) }
+      end.to change(Question, :count).by(1)
+    end
+
+    it 'redirect to show' do
+      post :create, params: { questionnaire_id: @questionnaire.id, question: attributes_for(:question) }
+      expect(response).to have_http_status :redirect
+    end
   end
 end
