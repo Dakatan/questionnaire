@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'questionnaires/:id/answer/:no' => 'questionnaires#answer', as: 'post_answer_questionnaire'
   resources :questionnaires do
     resources :questions do
-	    resources :answers, only: [:create, :update]
-	  end
+      resources :answers, only: [:create, :update]
+    end
   end
 end
