@@ -3,6 +3,6 @@ FactoryGirl.define do
     id 1
     respondent_id 1
     question_id 1
-    text 'Text'
+    json_text 'Text'
   end
 end
