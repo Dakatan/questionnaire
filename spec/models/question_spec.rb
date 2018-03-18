@@ -89,13 +89,13 @@ describe Question do
       @questionnaire = create(:questionnaire)
     end
 
-    it 'question is final' do
+    it 'question is first' do
       question = create(:question)
       create(:question, id: 2, no: 2)
       expect(question.first?).to eq true
     end
 
-    it 'question is not false' do
+    it 'question is not first' do
       create(:question)
       question = create(:question, id: 2)
       expect(question.first?).to eq false
