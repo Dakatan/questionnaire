@@ -18,7 +18,7 @@
     <% @questionnaires.each do |questionnaire| %>
       <tr>
         <td>
-          <% if questionnaire.questions.count != 0 %>
+          <% if questionnaire.questions.count != 0 && questionnaire.active? %>
             <%= link_to get_ans_question_questionnaire_path(questionnaire, 1), class: 'btn btn-sm btn-success' do %>
               <i class="fa fa-mouse-pointer" aria-hidden="true"></i> 回答する
             <% end %>
