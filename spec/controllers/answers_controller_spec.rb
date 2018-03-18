@@ -31,28 +31,28 @@ describe AnswersController do
     end
 
     it 'assigns all questions as @questionnaire' do
-      answer_params = attributes_for(:answer, text: 'changed')
+      answer_params = attributes_for(:answer, json_text: 'changed')
       put :update, params: { questionnaire_id: @questionnaire.id, question_id: @question.id, id: @answer.id, answer: answer_params }
       expect(assigns(:questionnaire)).to eq @questionnaire
     end
 
     it 'assigns the requested question as @question' do
-      answer_params = attributes_for(:answer, text: 'changed')
+      answer_params = attributes_for(:answer, json_text: 'changed')
       put :update, params: { questionnaire_id: @questionnaire.id, question_id: @question.id, id: @answer.id, answer: answer_params }
       expect(assigns(:question)).to eq @question
     end
 
     it 'assigns the requested question as @answer' do
-      answer_params = attributes_for(:answer, text: 'changed')
+      answer_params = attributes_for(:answer, json_text: 'changed')
       put :update, params: { questionnaire_id: @questionnaire.id, question_id: @question.id, id: @answer.id, answer: answer_params }
       expect(assigns(:answer)).to eq @answer
     end
 
     it 'update is success' do
-      answer_params = attributes_for(:answer, text: 'changed')
+      answer_params = attributes_for(:answer, json_text: 'changed')
       put :update, params: { questionnaire_id: @questionnaire.id, question_id: @question.id, id: @answer.id, answer: answer_params }
       @answer.reload
-      expect(@answer.text).to eq 'changed'
+      expect(@answer.json_text).to eq 'changed'
     end
   end
 end

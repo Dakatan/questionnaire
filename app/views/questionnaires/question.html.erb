@@ -4,7 +4,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">回答一覧</label>
     <div class="col-sm-10">
-      <% question_selection = JSON.parse(@question.text) %>
+      <% question_selection = JSON.parse(@question.json_text) %>
       <% question_selection.each.with_index(1) do |selection, index| %>
         <label class="custom-control custom-radio">
           <%= f.radio_button :active, index, class: 'custom-control-input' %>

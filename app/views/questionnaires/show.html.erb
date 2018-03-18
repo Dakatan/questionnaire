@@ -57,7 +57,7 @@
       <td><%= question.no %></td>
       <td><%= question.title %></td>
       <td><%= Settings.question[:types_map][question.question_type] %></td>
-      <td><%= question.text.present? ? JSON.parse(question.text).length : 0 %></td>
+      <td><%= question.json_text.present? ? JSON.parse(question.json_text).length : 0 %></td>
       <td>
         <%= link_to questionnaire_question_path(@questionnaire, question), class: 'btn btn-sm btn-info' do %>
           <i class="fa fa-external-link" aria-hidden="true"></i> 詳細

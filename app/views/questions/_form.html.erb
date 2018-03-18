@@ -27,18 +27,18 @@
   </div>
   <hr>
   <div id="selection-form">
-    <% if question[:text].present? %>
-      <% question_selections = JSON.parse(question[:text]) %>
+    <% if question[:json_text].present? %>
+      <% question_selections = JSON.parse(question[:json_text]) %>
       <% first_question_selection = question_selections.shift %>
       <div class="actions form-group row">
         <label class="col-sm-2 col-form-label">質問</label>
         <div class="col-sm-10">
-          <% if question.errors[:text].blank? %>
+          <% if question.errors[:json_text].blank? %>
             <input title="selection" class="form-control selection" value="<%= first_question_selection.to_s %>" />
           <% else %>
             <input title="selection" class="form-control selection is-invalid" value="<%= first_question_selection.to_s %>" />
             <span class="text-danger">
-              <%= question.errors[:text].first %>
+              <%= question.errors[:json_text].first %>
             </span>
           <% end %>
         </div>
@@ -139,7 +139,7 @@
       return false;
     } else {
       var json = escapeHTML(JSON.stringify(selections));
-      form.append('<input type="hidden" name="question[text]" value="' + json + '" />');
+      form.append('<input type="hidden" name="question[json_text]" value="' + json + '" />');
       form.submit();
     }
   });

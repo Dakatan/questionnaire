@@ -7,7 +7,7 @@ class Question < ApplicationRecord
 
   validates :title, presence: true
   validates :question_type, presence: true, inclusion: { in: Settings.question[:types_map].keys.map{|i| i.to_s} }
-  validates :text, presence: true
+  validates :json_text, presence: true
   validate :json_array_lint
 
   def prev
@@ -44,12 +44,12 @@ class Question < ApplicationRecord
 
   def json_array_lint
     begin
-      json = JSON.parse(text)
+      json = JSON.parse(json_text)
       unless json.instance_of?(Array)
-        errors.add(:text, '形式が正しくないか不正な文字が含まれています')
+        errors.add(:json_text, '形式が正しくないか不正な文字が含まれています')
       end
     rescue JSON::ParserError => e
-      errors.add(:text, '形式が正しくないか不正な文字が含まれています')
+      errors.add(:json_text, '形式が正しくないか不正な文字が含まれています')
     end
   end
 end

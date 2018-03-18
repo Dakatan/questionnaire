@@ -5,6 +5,6 @@ FactoryGirl.define do
     no 1
     title 'Title'
     question_type '01'
-    text '["A","B","C"]'
+    json_text '["A","B","C"]'
   end
 end
